@@ -1,0 +1,20 @@
+version: '2'
+
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+  postgresql:
+    image: 'bitnami/postgresql:latest'
+    environment:
+      - POSTGRESQL_USERNAME=my_user
+      - POSTGRESQL_PASSWORD=password123
+      - POSTGRESQL_DATABASE=datafoot_db
+    hostname: postgresql
+    networks:
+      - app-tier
+  myapp:
+    image: 'datafoot'
+    networks:
+      - app-tier
